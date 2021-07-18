@@ -3,8 +3,10 @@ package refqs
 import (
 	"math/rand"
 	"testing"
+	"time"
 )
 
+// TestSortBasics tests small slices with basic edge cases (e.g. no elements, all the same, already sorted)
 func TestSortBasics(t *testing.T) {
 	for _, test := range [][]int{
 		{},
@@ -23,7 +25,9 @@ func TestSortBasics(t *testing.T) {
 	}
 }
 
+// TestSortBig tests sorting large int slices (sized 10,000 - 100,000,000) of random ints.
 func TestSortBig(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
 	for _, n := range []int{1e4, 1e5, 1e6, 1e7, 1e8} {
 		test := randSlice(n)
 		Sort(test)
@@ -33,6 +37,7 @@ func TestSortBig(t *testing.T) {
 	}
 }
 
+// randSlice returns a []int of size n with random ints
 func randSlice(n int) []int {
 	s := make([]int, n)
 	for i := range s {
@@ -41,6 +46,7 @@ func randSlice(n int) []int {
 	return s
 }
 
+// sorted checks if the given slice is sorted
 func sorted(s []int) bool {
 	for i := 0; i < len(s)-1; i++ {
 		if s[i] > s[i+1] {
