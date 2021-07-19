@@ -1,3 +1,6 @@
+// refqs, or reflective quicksort, is a quicksort-family algorithm that attempts to provide n*log(n) average time
+// performance, but performs better than most common implementations of quicksort for common edge cases (e.g already
+// sorted, almost already sorted, reverse sorted)
 package refqs
 
 import "sort"
