@@ -2,6 +2,7 @@ package refqs
 
 import (
 	"math/rand"
+	"sort"
 	"testing"
 	"time"
 )
@@ -18,7 +19,7 @@ func TestSortBasics(t *testing.T) {
 		{1, 9, 2, 8, 3, 7, 4, 6, 5},
 		{1, 1, 1, 1, 2, 2, 2, 2, 3, 7, 7, 7, 7, 7, 7, 7, 5, 5, 5, 4, 3, 2, 2, 9},
 	} {
-		Sort(test)
+		Sort(sort.IntSlice(test))
 		if !sorted(test) {
 			t.Errorf("%v is not sorted", test)
 		}
@@ -28,9 +29,9 @@ func TestSortBasics(t *testing.T) {
 // TestSortBig tests sorting large int slices (sized 10,000 - 100,000,000) of random ints.
 func TestSortBig(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
-	for _, n := range []int{1e4, 1e5, 1e6, 1e7, 1e8} {
+	for _, n := range []int{1e4, 1e5, 1e6, 1e7} {
 		test := randSlice(n)
-		Sort(test)
+		Sort(sort.IntSlice(test))
 		if !sorted(test) {
 			t.Errorf("Could not sort []int of size %d", n)
 		}
